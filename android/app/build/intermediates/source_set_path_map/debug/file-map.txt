@@ -1,0 +1,16 @@
+com.example.basic_nfc_app-jetified-window-1.0.0-beta04-0 C:\Users\cmbmk\.gradle\caches\transforms-3\032f4dff274e516110d9363a9793a3e3\transformed\jetified-window-1.0.0-beta04\res
+com.example.basic_nfc_app-jetified-window-java-1.0.0-beta04-1 C:\Users\cmbmk\.gradle\caches\transforms-3\142c24f2530665bb6deb4123ab140714\transformed\jetified-window-java-1.0.0-beta04\res
+com.example.basic_nfc_app-lifecycle-runtime-2.3.1-2 C:\Users\cmbmk\.gradle\caches\transforms-3\25a884faa36a531a9e5f369d596bbf88\transformed\lifecycle-runtime-2.3.1\res
+com.example.basic_nfc_app-core-1.12.0-3 C:\Users\cmbmk\.gradle\caches\transforms-3\6247dd56d81c6b16d694b7768e18cada\transformed\core-1.12.0\res
+com.example.basic_nfc_app-jetified-annotation-experimental-1.3.0-4 C:\Users\cmbmk\.gradle\caches\transforms-3\ae329bc8a0eb87982c4fe41e3ec5da7f\transformed\jetified-annotation-experimental-1.3.0\res
+com.example.basic_nfc_app-jetified-core-ktx-1.12.0-5 C:\Users\cmbmk\.gradle\caches\transforms-3\de312b122ff8f91227f080e64c7d0f0f\transformed\jetified-core-ktx-1.12.0\res
+com.example.basic_nfc_app-packaged_res-6 C:\Users\cmbmk\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_nfc_kit-3.5.2\android\build\intermediates\packaged_res\debug
+com.example.basic_nfc_app-packaged_res-7 C:\Users\cmbmk\AppData\Local\Pub\Cache\hosted\pub.dev\nfc_manager-3.5.0\android\build\intermediates\packaged_res\debug
+com.example.basic_nfc_app-pngs-8 C:\proyects\basic_nfc_app\android\app\build\generated\res\pngs\debug
+com.example.basic_nfc_app-resValues-9 C:\proyects\basic_nfc_app\android\app\build\generated\res\resValues\debug
+com.example.basic_nfc_app-rs-10 C:\proyects\basic_nfc_app\android\app\build\generated\res\rs\debug
+com.example.basic_nfc_app-mergeDebugResources-11 C:\proyects\basic_nfc_app\android\app\build\intermediates\incremental\debug\mergeDebugResources\merged.dir
+com.example.basic_nfc_app-mergeDebugResources-12 C:\proyects\basic_nfc_app\android\app\build\intermediates\incremental\debug\mergeDebugResources\stripped.dir
+com.example.basic_nfc_app-merged_res-13 C:\proyects\basic_nfc_app\android\app\build\intermediates\merged_res\debug
+com.example.basic_nfc_app-debug-14 C:\proyects\basic_nfc_app\android\app\src\debug\res
+com.example.basic_nfc_app-main-15 C:\proyects\basic_nfc_app\android\app\src\main\res

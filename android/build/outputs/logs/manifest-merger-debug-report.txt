@@ -1,0 +1,25 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\proyects\basic_nfc_app\android\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest8645274340628174834.xml:2:13-83
+INJECTED from C:\proyects\basic_nfc_app\android\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest8645274340628174834.xml:2:13-83
+INJECTED from C:\proyects\basic_nfc_app\android\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest8645274340628174834.xml:2:13-83
+	package
+		INJECTED from C:\proyects\basic_nfc_app\android\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest8645274340628174834.xml
+		ADDED from C:\proyects\basic_nfc_app\android\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest8645274340628174834.xml:2:13-83
+		INJECTED from C:\proyects\basic_nfc_app\android\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest8645274340628174834.xml
+	xmlns:android
+		ADDED from C:\proyects\basic_nfc_app\android\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest8645274340628174834.xml:2:23-81
+uses-sdk
+INJECTED from C:\proyects\basic_nfc_app\android\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest8645274340628174834.xml reason: use-sdk injection requested
+INJECTED from C:\proyects\basic_nfc_app\android\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest8645274340628174834.xml
+INJECTED from C:\proyects\basic_nfc_app\android\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest8645274340628174834.xml
+INJECTED from C:\proyects\basic_nfc_app\android\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest8645274340628174834.xml
+INJECTED from C:\proyects\basic_nfc_app\android\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest8645274340628174834.xml
+	android:targetSdkVersion
+		INJECTED from C:\proyects\basic_nfc_app\android\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest8645274340628174834.xml
+		ADDED from C:\proyects\basic_nfc_app\android\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest8645274340628174834.xml
+		INJECTED from C:\proyects\basic_nfc_app\android\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest8645274340628174834.xml
+	android:minSdkVersion
+		INJECTED from C:\proyects\basic_nfc_app\android\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest8645274340628174834.xml
+		ADDED from C:\proyects\basic_nfc_app\android\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest8645274340628174834.xml
+		INJECTED from C:\proyects\basic_nfc_app\android\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest8645274340628174834.xml
