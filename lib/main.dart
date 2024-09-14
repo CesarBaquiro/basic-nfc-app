@@ -89,77 +89,85 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
               ],
               controller: _tabController,
             )),
-        body: new TabBarView(controller: _tabController, children: <Widget>[
-          Scrollbar(
+        body: new TabBarView(
+          controller: _tabController,
+          children: <Widget>[
+            Scrollbar(
               child: SingleChildScrollView(
-                  child: Center(
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                const SizedBox(height: 20),
-                Text(
-                    'Corriendo app en: $_platformVersion\nNFC: $_availability'),
-                const SizedBox(height: 10),
-                ElevatedButton(
-                  onPressed: () async {
-                    try {
-                      NFCTag tag = await FlutterNfcKit.poll();
-                      setState(() {
-                        _tag = tag;
-                      });
-                      await FlutterNfcKit.setIosAlertMessage(
-                          "Working on it...");
-                      _mifareResult = null;
-                      if (tag.standard == "ISO 14443-4 (Type B)") {
-                        String result1 =
-                            await FlutterNfcKit.transceive("00B0950000");
-                        String result2 = await FlutterNfcKit.transceive(
-                            "00A4040009A00000000386980701");
-                        setState(() {
-                          _result = '1: $result1\n2: $result2\n';
-                        });
-                      } else if (tag.type == NFCTagType.iso18092) {
-                        String result1 =
-                            await FlutterNfcKit.transceive("060080080100");
-                        setState(() {
-                          _result = '1: $result1\n';
-                        });
-                      } else if (tag.ndefAvailable ?? false) {
-                        var ndefRecords = await FlutterNfcKit.readNDEFRecords();
-                        var ndefString = '';
-                        for (int i = 0; i < ndefRecords.length; i++) {
-                          ndefString += '${i + 1}: ${ndefRecords[i]}\n';
-                        }
-                        setState(() {
-                          _result = ndefString;
-                        });
-                      } else if (tag.type == NFCTagType.webusb) {
-                        var r = await FlutterNfcKit.transceive(
-                            "00A4040006D27600012401");
-                        print(r);
-                      }
-                    } catch (e) {
-                      setState(() {
-                        _result = 'error: $e';
-                      });
-                    }
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      const SizedBox(height: 20),
+                      Text(
+                          'Corriendo app en: $_platformVersion\nNFC: $_availability'),
+                      const SizedBox(height: 10),
+                      ElevatedButton(
+                        onPressed: () async {
+                          try {
+                            NFCTag tag = await FlutterNfcKit.poll();
+                            setState(() {
+                              _tag = tag;
+                            });
+                            await FlutterNfcKit.setIosAlertMessage(
+                                "Working on it...");
+                            _mifareResult = null;
+                            if (tag.standard == "ISO 14443-4 (Type B)") {
+                              String result1 =
+                                  await FlutterNfcKit.transceive("00B0950000");
+                              String result2 = await FlutterNfcKit.transceive(
+                                  "00A4040009A00000000386980701");
+                              setState(() {
+                                _result = '1: $result1\n2: $result2\n';
+                              });
+                            } else if (tag.type == NFCTagType.iso18092) {
+                              String result1 = await FlutterNfcKit.transceive(
+                                  "060080080100");
+                              setState(() {
+                                _result = '1: $result1\n';
+                              });
+                            } else if (tag.ndefAvailable ?? false) {
+                              var ndefRecords =
+                                  await FlutterNfcKit.readNDEFRecords();
+                              var ndefString = '';
+                              for (int i = 0; i < ndefRecords.length; i++) {
+                                ndefString += '${i + 1}: ${ndefRecords[i]}\n';
+                              }
+                              setState(() {
+                                _result = ndefString;
+                              });
+                            } else if (tag.type == NFCTagType.webusb) {
+                              var r = await FlutterNfcKit.transceive(
+                                  "00A4040006D27600012401");
+                              print(r);
+                            }
+                          } catch (e) {
+                            setState(() {
+                              _result = 'error: $e';
+                            });
+                          }
 
-                    // Pretend that we are working
-                    if (!kIsWeb) sleep(new Duration(seconds: 1));
-                    await FlutterNfcKit.finish(iosAlertMessage: "Finished!");
-                  },
-                  child: Text('Escanear'),
+                          // Pretend that we are working
+                          if (!kIsWeb) sleep(new Duration(seconds: 1));
+                          await FlutterNfcKit.finish(
+                              iosAlertMessage: "Finished!");
+                        },
+                        child: Text('Escanear'),
+                      ),
+                      const SizedBox(height: 10),
+                      Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: _tag != null
+                              ? Text(
+                                  'ID: ${_tag!.id}\nStandard: ${_tag!.standard}\nType: ${_tag!.type}\nATQA: ${_tag!.atqa}\nSAK: ${_tag!.sak}\nHistorical Bytes: ${_tag!.historicalBytes}\nProtocol Info: ${_tag!.protocolInfo}\nApplication Data: ${_tag!.applicationData}\nHigher Layer Response: ${_tag!.hiLayerResponse}\nManufacturer: ${_tag!.manufacturer}\nSystem Code: ${_tag!.systemCode}\nDSF ID: ${_tag!.dsfId}\nNDEF Available: ${_tag!.ndefAvailable}\nNDEF Type: ${_tag!.ndefType}\nNDEF Writable: ${_tag!.ndefWritable}\nNDEF Can Make Read Only: ${_tag!.ndefCanMakeReadOnly}\nNDEF Capacity: ${_tag!.ndefCapacity}\nMifare Info:${_tag!.mifareInfo} Transceive Result:\n$_result\n\nBlock Message:\n$_mifareResult')
+                              : const Text('No hay Chips escaneados')),
+                    ],
+                  ),
                 ),
-                const SizedBox(height: 10),
-                Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: _tag != null
-                        ? Text(
-                            'ID: ${_tag!.id}\nStandard: ${_tag!.standard}\nType: ${_tag!.type}\nATQA: ${_tag!.atqa}\nSAK: ${_tag!.sak}\nHistorical Bytes: ${_tag!.historicalBytes}\nProtocol Info: ${_tag!.protocolInfo}\nApplication Data: ${_tag!.applicationData}\nHigher Layer Response: ${_tag!.hiLayerResponse}\nManufacturer: ${_tag!.manufacturer}\nSystem Code: ${_tag!.systemCode}\nDSF ID: ${_tag!.dsfId}\nNDEF Available: ${_tag!.ndefAvailable}\nNDEF Type: ${_tag!.ndefType}\nNDEF Writable: ${_tag!.ndefWritable}\nNDEF Can Make Read Only: ${_tag!.ndefCanMakeReadOnly}\nNDEF Capacity: ${_tag!.ndefCapacity}\nMifare Info:${_tag!.mifareInfo} Transceive Result:\n$_result\n\nBlock Message:\n$_mifareResult')
-                        : const Text('No hay Chips escaneados')),
-              ])))),
-          Center(
-            child: Column(
+              ),
+            ),
+            Center(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   const SizedBox(height: 20),
@@ -188,9 +196,11 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                                 });
                               }
                             } catch (e, stacktrace) {
-                              setState(() {
-                                _writeResult = 'error: $e';
-                              });
+                              setState(
+                                () {
+                                  _writeResult = 'error: $e';
+                                },
+                              );
                               print(stacktrace);
                             } finally {
                               await FlutterNfcKit.finish();
@@ -206,67 +216,106 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                       ElevatedButton(
                         onPressed: () {
                           showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return SimpleDialog(
-                                    title: Text("Tipo de registro"),
-                                    children: <Widget>[
-                                      SimpleDialogOption(
-                                        child: Text("Texto registrado"),
-                                        onPressed: () async {
-                                          Navigator.pop(context);
-                                          final result = await Navigator.push(
-                                              context, MaterialPageRoute(
-                                                  builder: (context) {
+                            context: context,
+                            builder: (BuildContext context) {
+                              return SimpleDialog(
+                                title: Text("Tipo de registro"),
+                                children: <Widget>[
+                                  SimpleDialogOption(
+                                    child: Text("Registrar texto"),
+                                    onPressed: () async {
+                                      Navigator.pop(context);
+                                      final result = await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) {
                                             return NDEFTextRecordSetting();
-                                          }));
-                                          if (result != null) {
-                                            if (result is ndef.TextRecord) {
-                                              setState(() {
-                                                _records!.add(result);
-                                              });
-                                            }
-                                          }
-                                        },
-                                      ),
-                                      SimpleDialogOption(
-                                        child: Text("Registro Uri"),
-                                        onPressed: () async {
-                                          Navigator.pop(context);
-                                          final result = await Navigator.push(
-                                              context, MaterialPageRoute(
-                                                  builder: (context) {
+                                          },
+                                        ),
+                                      );
+                                      if (result != null) {
+                                        if (result is ndef.TextRecord) {
+                                          setState(() {
+                                            _records!.add(result);
+                                          });
+                                        }
+                                      }
+                                    },
+                                  ),
+                                  SimpleDialogOption(
+                                    child: Text("Registro Uri"),
+                                    onPressed: () async {
+                                      Navigator.pop(context);
+                                      final result = await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) {
                                             return NDEFUriRecordSetting();
-                                          }));
-                                          if (result != null) {
-                                            if (result is ndef.UriRecord) {
-                                              setState(() {
-                                                _records!.add(result);
-                                              });
-                                            }
-                                          }
-                                        },
-                                      ),
-                                      SimpleDialogOption(
-                                        child: Text("Registro RAW"),
-                                        onPressed: () async {
-                                          Navigator.pop(context);
-                                          final result = await Navigator.push(
-                                              context, MaterialPageRoute(
-                                                  builder: (context) {
+                                          },
+                                        ),
+                                      );
+                                      if (result != null) {
+                                        if (result is ndef.UriRecord) {
+                                          setState(
+                                            () {
+                                              _records!.add(result);
+                                            },
+                                          );
+                                        }
+                                      }
+                                    },
+                                  ),
+                                  SimpleDialogOption(
+                                    child: Text("Registro RAW"),
+                                    onPressed: () async {
+                                      Navigator.pop(context);
+                                      final result = await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) {
                                             return NDEFRecordSetting();
-                                          }));
-                                          if (result != null) {
-                                            if (result is ndef.NDEFRecord) {
-                                              setState(() {
-                                                _records!.add(result);
-                                              });
-                                            }
-                                          }
+                                          },
+                                        ),
+                                      );
+                                      if (result != null) {
+                                        if (result is ndef.NDEFRecord) {
+                                          setState(
+                                            () {
+                                              _records!.add(result);
+                                            },
+                                          );
+                                        }
+                                      }
+                                    },
+                                  ),
+                                  SimpleDialogOption(
+                                    child: Text("Eliminar registros"),
+                                    onPressed: () async {
+                                      final result = ndef.NDEFRecord(
+                                        tnf: ndef.TypeNameFormat.empty,
+                                        type: (null),
+                                        id: (null),
+                                        payload: (null),
+                                      );
+
+                                      MaterialPageRoute(
+                                        builder: (context) {
+                                          return NDEFRecordSetting();
                                         },
-                                      ),
-                                    ]);
-                              });
+                                      );
+
+                                      setState(
+                                        () {
+                                          _records!.add(result);
+                                          Navigator.pop(context);
+                                        },
+                                      );
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          );
                         },
                         child: Text("Añadir registro"),
                       )
@@ -278,36 +327,44 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                   Expanded(
                     flex: 1,
                     child: ListView(
-                        shrinkWrap: true,
-                        children: List<Widget>.generate(
-                            _records!.length,
-                            (index) => GestureDetector(
-                                  child: Padding(
-                                      padding: const EdgeInsets.all(10),
-                                      child: Text(
-                                          'id:${_records![index].idString}\ntnf:${_records![index].tnf}\ntype:${_records![index].type?.toHexString()}\npayload:${_records![index].payload?.toHexString()}\n')),
-                                  onTap: () async {
-                                    final result = await Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                      return NDEFRecordSetting(
-                                          record: _records![index]);
-                                    }));
-                                    if (result != null) {
-                                      if (result is ndef.NDEFRecord) {
-                                        setState(() {
-                                          _records![index] = result;
-                                        });
-                                      } else if (result is String &&
-                                          result == "Delete") {
-                                        _records!.removeAt(index);
-                                      }
-                                    }
-                                  },
-                                ))),
+                      shrinkWrap: true,
+                      children: List<Widget>.generate(
+                        _records!.length,
+                        (index) => GestureDetector(
+                          child: Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: Text(
+                                'id:${_records![index]}\ntnf:${_records![index].tnf}\ntype:${_records![index].type?.toHexString()}\npayload:${_records![index].payload?.toHexString()}\n'),
+                          ),
+                          onTap: () async {
+                            final result = await Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return NDEFRecordSetting(
+                                  record: _records![index]);
+                            }));
+                            if (result != null) {
+                              if (result is ndef.NDEFRecord) {
+                                setState(() {
+                                  _records![index] = result;
+                                });
+                              } else if (result is String &&
+                                  result == "Delete") {
+                                setState(() {
+                                  _records!.removeAt(
+                                      index); // Elimina el elemento en la posición 'index'
+                                });
+                              }
+                            }
+                          },
+                        ),
+                      ),
+                    ),
                   ),
-                ]),
-          )
-        ]),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
